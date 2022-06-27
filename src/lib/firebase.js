@@ -3,13 +3,12 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBJv1cnmggBf7L4aybP2hZ3fq0imA9HsDs",
-  authDomain: "itss-9794b.firebaseapp.com",
-  projectId: "itss-9794b",
-  storageBucket: "itss-9794b.appspot.com",
-  messagingSenderId: "318169148154",
-  appId: "1:318169148154:web:db7e3718ec80b97a763743",
-  measurementId: "G-X2EEPRCK63"
+  apiKey: "AIzaSyAXHhhp4I9u6Dm29zdcgr4O9AIcanpstbE",
+  authDomain: "itss-7b354.firebaseapp.com",
+  projectId: "itss-7b354",
+  storageBucket: "itss-7b354.appspot.com",
+  messagingSenderId: "175274013916",
+  appId: "1:175274013916:web:3151724435ac2e9a1b7019"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -94,3 +93,15 @@ export const updateUser = async (user, image) => {
     console.log(err);
   }
 }
+
+export const uploadImage = async (image) => {
+  const ref = firebase.storage().ref().child(`/images/${image.name}`);
+  let downloadUrl = "";
+  try {
+    await ref.put(image);
+    downloadUrl = await ref.getDownloadURL();
+  } catch (err) {
+    console.log(err);
+  }
+  return downloadUrl;
+};
